@@ -10,10 +10,10 @@ import java.sql.SQLException;
  * @author Filipe
  */
 public class SequenceManager {
-    private ConectorBD conn;
+    private ConectorBD connection;
     
-    public SequenceManager(ConectorBD conn){
-        this.conn = conn;
+    public SequenceManager(ConectorBD connection){
+        this.connection = connection;
     }
     
     public int getValue(String sequenceName) throws SQLException{
@@ -21,11 +21,11 @@ public class SequenceManager {
         String sql = "SELECT nextval('" + sequenceName + "')";
         
         try{
-            ResultSet resultSet = conn.getSelect(sql);
+            ResultSet resultSet = connection.getSelect(sql);
             if(resultSet.next()){
                 value = resultSet.getInt(1);
             }
-            conn.close(resultSet);
+            connection.close(resultSet);
         } catch(SQLException e){
             e.printStackTrace();
         }
