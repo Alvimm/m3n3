@@ -1,12 +1,12 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package cadastrobd;
 
 import cadastrobd.model.PessoaFisica;
-import cadastrobd.model.PessoaJuridica;
 import cadastrobd.model.PessoaFisicaDAO;
+import cadastrobd.model.PessoaJuridica;
 import cadastrobd.model.PessoaJuridicaDAO;
 import cadastrobd.model.util.ConectorBD;
 import cadastrobd.model.util.SequenceManager;
@@ -16,8 +16,8 @@ import java.util.List;
  *
  * @author Filipe
  */
-public class CadastroBD {
-    public static void main(String[] args) {
+public class CadastroBDTeste {
+        public static void main(String[] args) {
         ConectorBD conectorBD = new ConectorBD();
         SequenceManager sequenceManager = new SequenceManager(conectorBD);
 
@@ -64,8 +64,8 @@ public class CadastroBD {
         //pessoaJuridicaDAO.alterar(pessoaAlterada);
         
         // Excluir os dados da pessoa jurídica no banco
-        int idPessoaExcluir = 22;
-        pessoaJuridicaDAO.excluir(idPessoaExcluir);
+        //int idPessoaExcluir = 22;
+        //pessoaJuridicaDAO.excluir(idPessoaExcluir);
         
         // Consultar todas as pessoas físicas do banco de dados e listar no console
         List<PessoaJuridica> pessoas = pessoaJuridicaDAO.getPessoas();
@@ -82,5 +82,4 @@ public class CadastroBD {
         }
 
     }
-
 }
