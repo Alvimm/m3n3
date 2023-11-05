@@ -9,7 +9,7 @@ package cadastrobd.model;
  * @author Filipe
  */
 public class Pessoas {
-    private int id;
+    private int id_pessoa;
     private String nome;
     private String logradouro;
     private String cidade;
@@ -19,8 +19,8 @@ public class Pessoas {
     
     public Pessoas(){}
 
-    public Pessoas(int id, String nome, String logradouro, String cidade, String estado, String telefone, String email) {
-        this.id = id;
+    public Pessoas(int id_pessoa, String nome, String logradouro, String cidade, String estado, String telefone, String email) {
+        this.id_pessoa = id_pessoa;
         this.nome = nome;
         this.logradouro = logradouro;
         this.cidade = cidade;
@@ -30,7 +30,7 @@ public class Pessoas {
     }
     
     public void exibir(){
-        System.out.println("Id: " + id);
+        System.out.println("Id: " + id_pessoa);
         System.out.println("Nome: " + nome);
         System.out.println("Logradouro: " + logradouro);
         System.out.println("Cidade: " + cidade);
@@ -40,11 +40,11 @@ public class Pessoas {
     }
 
     public int getId() {
-        return id;
+        return id_pessoa;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id_pessoa = id_pessoa;
     }
 
     public String getNome() {
@@ -98,7 +98,7 @@ public class Pessoas {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + this.id;
+        hash = 97 * hash + this.id_pessoa;
         return hash;
     }
 
@@ -114,7 +114,7 @@ public class Pessoas {
             return false;
         }
         final Pessoas other = (Pessoas) obj;
-        return this.id == other.id;
+        return this.id_pessoa == other.id_pessoa;
     }
     
     

@@ -22,7 +22,7 @@ public class ConectorBD {
     private Properties properties = new Properties();
     
     public ConectorBD(){
-        try (FileInputStream input = new FileInputStream("config.properties")){
+        try (FileInputStream input = new FileInputStream("config.properties")) {
             properties.load(input);
         } catch(IOException e){
             e.printStackTrace();
@@ -36,7 +36,7 @@ public class ConectorBD {
                 String user = properties.getProperty("db.user");
                 String password = properties.getProperty("db.password");
                 connection = DriverManager.getConnection(url, user, password);
-                System.out.println("Conexão estabelecida com sucesso!");
+                //System.out.println("Conexão estabelecida com sucesso!");
             }
         } catch(SQLException e){
             System.err.println("Erro ao estabelecer a conexão com o banco de dados: " + e.getMessage());

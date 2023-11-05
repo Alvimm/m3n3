@@ -27,23 +27,23 @@ public class PessoaFisicaDAO {
         this.sequenceManager = sequenceManager;
     }
 
-    public PessoaFisica getPessoa(int id) {
-        String sql = "SELECT * FROM Pessoas p INNER JOIN PessoaFisica pf ON p.id = pf.id WHERE p.id = ?";
+    public PessoaFisica getPessoa(int id_pessoa) {
+        String sql = "SELECT * FROM Pessoas p INNER JOIN PessoaFisica pf ON p.id_pessoa = pf.id_pessoa WHERE p.id_pessoa = ?";
 
         try (Connection connection = conectorBD.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, id_pessoa);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 return new PessoaFisica(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("id_pessoa"),
+                        resultSet.getString("cpf"),
                         resultSet.getString("nome"),
                         resultSet.getString("logradouro"),
                         resultSet.getString("cidade"),
                         resultSet.getString("estado"),
                         resultSet.getString("telefone"),
-                        resultSet.getString("email"),
-                        resultSet.getString("cpf")
+                        resultSet.getString("email")
                 );
             }
         } catch (SQLException e) {
@@ -54,20 +54,20 @@ public class PessoaFisicaDAO {
 
     public List<PessoaFisica> getPessoas() {
         List<PessoaFisica> pessoas = new ArrayList<>();
-        String sql = "SELECT * FROM Pessoas p INNER JOIN PessoaFisica pf ON p.id = pf.id";
+        String sql = "SELECT * FROM Pessoas p INNER JOIN PessoaFisica pf ON p.id_pessoa = pf.id_pessoa";
 
         try (Connection connection = conectorBD.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql); ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
                 PessoaFisica pessoa = new PessoaFisica(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("id_pessoa"),
+                        resultSet.getString("cpf"),
                         resultSet.getString("nome"),
                         resultSet.getString("logradouro"),
                         resultSet.getString("cidade"),
                         resultSet.getString("estado"),
                         resultSet.getString("telefone"),
-                        resultSet.getString("email"),
-                        resultSet.getString("cpf")
+                        resultSet.getString("email")
                 );
                 pessoas.add(pessoa);
             }
@@ -78,13 +78,15 @@ public class PessoaFisicaDAO {
     }
 
     public void incluir(PessoaFisica pessoaFisica) {
+        String sqlPessoaFisica = "INSERT INTO PessoaFisica (id_pessoa, cpf) VALUES (?, ?)";
         String sqlPessoa = "INSERT INTO Pessoas (nome, logradouro, cidade, estado, telefone, email) VALUES (?, ?, ?, ?, ?, ?)";
-        String sqlPessoaFisica = "INSERT INTO PessoaFisica (id, cpf) VALUES (?, ?)";
+        
 
         try (Connection connection = conectorBD.getConnection(); PreparedStatement preparedStatementPessoa = connection.prepareStatement(sqlPessoa, PreparedStatement.RETURN_GENERATED_KEYS); PreparedStatement preparedStatementPessoaFisica = connection.prepareStatement(sqlPessoaFisica)) {
 
             connection.setAutoCommit(false);
-
+            
+        
             preparedStatementPessoa.setString(1, pessoaFisica.getNome());
             preparedStatementPessoa.setString(2, pessoaFisica.getLogradouro());
             preparedStatementPessoa.setString(3, pessoaFisica.getCidade());
@@ -96,7 +98,8 @@ public class PessoaFisicaDAO {
 
             try (ResultSet generatedKeys = preparedStatementPessoa.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    int novoId = sequenceManager.getValue("pessoa_id_seq");
+                    //int novoId = sequenceManager.getValue("pessoa_id_seq");
+                    int novoId = generatedKeys.getInt(1); // ALTERAR
                     preparedStatementPessoaFisica.setInt(1, novoId);
                     preparedStatementPessoaFisica.setString(2, pessoaFisica.getCpf());
                     preparedStatementPessoaFisica.execute();
@@ -115,8 +118,8 @@ public class PessoaFisicaDAO {
     }
 
     public void alterar(PessoaFisica pessoaFisica) {
-        String sqlPessoa = "UPDATE Pessoas SET nome = ?, logradouro = ?, cidade = ?, estado = ?, telefone = ?, email = ? WHERE id = ?";
-        String sqlPessoaFisica = "UPDATE PessoaFisica SET cpf = ? WHERE id = ?";
+        String sqlPessoa = "UPDATE Pessoas SET nome = ?, logradouro = ?, cidade = ?, estado = ?, telefone = ?, email = ? WHERE id_pessoa = ?";
+        String sqlPessoaFisica = "UPDATE PessoaFisica SET cpf = ? WHERE id_pessoa = ?";
 
         try (Connection connection = conectorBD.getConnection(); PreparedStatement preparedStatementPessoa = connection.prepareStatement(sqlPessoa); PreparedStatement preparedStatementPessoaFisica = connection.prepareStatement(sqlPessoaFisica)) {
 
@@ -147,8 +150,8 @@ public class PessoaFisicaDAO {
     }
 
     public void excluir(int id) {
-        String sqlPessoaFisica = "DELETE FROM PessoaFisica WHERE id = ?";
-        String sqlPessoa = "DELETE FROM Pessoas WHERE id = ?";
+        String sqlPessoaFisica = "DELETE FROM PessoaFisica WHERE id_pessoa = ?";
+        String sqlPessoa = "DELETE FROM Pessoas WHERE id_pessoa = ?";
 
         try (Connection connection = conectorBD.getConnection(); PreparedStatement preparedStatementPessoaFisica = connection.prepareStatement(sqlPessoaFisica); PreparedStatement preparedStatementPessoa = connection.prepareStatement(sqlPessoa)) {
 

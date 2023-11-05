@@ -11,6 +11,10 @@ import java.sql.SQLException;
  */
 public class SequenceManager {
     private ConectorBD connection;
+
+    public SequenceManager() {
+    }
+    
     
     public SequenceManager(ConectorBD connection){
         this.connection = connection;

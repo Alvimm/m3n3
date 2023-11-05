@@ -11,8 +11,8 @@ package cadastrobd.model;
 public class PessoaJuridica extends Pessoas {
     private String cnpj;
     public PessoaJuridica(){}
-    public PessoaJuridica(String cnpj, int id, String nome, String logradouro, String cidade, String estado, String telefone, String email) {
-        super(id, nome, logradouro, cidade, estado, telefone, email);
+    public PessoaJuridica(int id_pessoa, String cnpj, String nome, String logradouro, String cidade, String estado, String telefone, String email) {
+        super(id_pessoa, nome, logradouro, cidade, estado, telefone, email);
         this.cnpj = cnpj;
     }
     
