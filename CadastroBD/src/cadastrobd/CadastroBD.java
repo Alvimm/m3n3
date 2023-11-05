@@ -48,52 +48,51 @@ public class CadastroBD {
             }
 
             switch (opcao) {
-                case 1: {
-                    System.out.println("Escolha o tipo (F - Pessoa Física, J - Pessoa Jurídica):");
+                case 1 ->  {
+                    System.out.println("Escolha o tipo (1 - Pessoa Física, 2 - Pessoa Jurídica):");
                     int tipo = scanner.nextInt();
                     scanner.nextLine();
-                    if (tipo == 1) {
-                        System.out.print("CPF: ");
-                        String cpf = scanner.nextLine();
-                        System.out.print("Nome: ");
-                        String nome = scanner.nextLine();
-                        System.out.print("Logradouro: ");
-                        String logradouro = scanner.nextLine();
-                        System.out.print("Cidade: ");
-                        String cidade = scanner.nextLine();
-                        System.out.print("Estado: ");
-                        String estado = scanner.nextLine();
-                        System.out.print("Telefone: ");
-                        String telefone = scanner.nextLine();
-                        System.out.print("Email: ");
-                        String email = scanner.nextLine();
-
-                        PessoaFisica novaPessoa = new PessoaFisica(0, cpf, nome, logradouro, cidade, estado, telefone, email);
-                        pessoaFisicaDAO.incluir(novaPessoa);
-                    } else if (tipo == 2) {
-                        System.out.print("CNPJ: ");
-                        String cnpj = scanner.nextLine();
-                        System.out.print("Nome: ");
-                        String nome = scanner.nextLine();
-                        System.out.print("Logradouro: ");
-                        String logradouro = scanner.nextLine();
-                        System.out.print("Cidade: ");
-                        String cidade = scanner.nextLine();
-                        System.out.print("Estado: ");
-                        String estado = scanner.nextLine();
-                        System.out.print("Telefone: ");
-                        String telefone = scanner.nextLine();
-                        System.out.print("Email: ");
-                        String email = scanner.nextLine();
-
-                        PessoaJuridica novaPessoa = new PessoaJuridica(0, cnpj, nome, logradouro, cidade, estado, telefone, email);
-                        pessoaJuridicaDAO.incluir(novaPessoa);
-                    } else {
-                        System.out.println("Opção inválida.");
-                    }
-                    break;
+                switch (tipo) {
+                    case 1 ->                         {
+                            System.out.print("CPF: ");
+                            String cpf = scanner.nextLine();
+                            System.out.print("Nome: ");
+                            String nome = scanner.nextLine();
+                            System.out.print("Logradouro: ");
+                            String logradouro = scanner.nextLine();
+                            System.out.print("Cidade: ");
+                            String cidade = scanner.nextLine();
+                            System.out.print("Estado: ");
+                            String estado = scanner.nextLine();
+                            System.out.print("Telefone: ");
+                            String telefone = scanner.nextLine();
+                            System.out.print("Email: ");
+                            String email = scanner.nextLine();
+                            PessoaFisica novaPessoa = new PessoaFisica(0, cpf, nome, logradouro, cidade, estado, telefone, email);
+                            pessoaFisicaDAO.incluir(novaPessoa);
+                        }
+                    case 2 ->                         {
+                            System.out.print("CNPJ: ");
+                            String cnpj = scanner.nextLine();
+                            System.out.print("Nome: ");
+                            String nome = scanner.nextLine();
+                            System.out.print("Logradouro: ");
+                            String logradouro = scanner.nextLine();
+                            System.out.print("Cidade: ");
+                            String cidade = scanner.nextLine();
+                            System.out.print("Estado: ");
+                            String estado = scanner.nextLine();
+                            System.out.print("Telefone: ");
+                            String telefone = scanner.nextLine();
+                            System.out.print("Email: ");
+                            String email = scanner.nextLine();
+                            PessoaJuridica novaPessoa = new PessoaJuridica(0, cnpj, nome, logradouro, cidade, estado, telefone, email);
+                            pessoaJuridicaDAO.incluir(novaPessoa);
+                        }
+                    default -> System.out.println("Opção inválida.");
                 }
-                case 2: {
+                }
+                case 2 ->  {
                     System.out.println("Escolha o tipo (1 - Pessoa Física, 2 - Pessoa Jurídica):");
                     int tipo = scanner.nextInt();
                     scanner.nextLine();
@@ -101,7 +100,7 @@ public class CadastroBD {
                     int idPessoaParaAlterar = scanner.nextInt();
                     scanner.nextLine();
                     switch (tipo) {
-                        case 1:
+                        case 1 -> {
                             PessoaFisica pessoaParaAlterar = pessoaFisicaDAO.getPessoa(idPessoaParaAlterar);
                             if (pessoaParaAlterar != null) {
 
@@ -134,8 +133,8 @@ public class CadastroBD {
                             } else {
                                 System.out.println("Pessoa não encontrada.");
                             }
-                            break;
-                        case 2:
+                    }
+                        case 2 -> {
                             PessoaJuridica pessoaJParaAlterar = pessoaJuridicaDAO.getPessoa(idPessoaParaAlterar);
                             if (pessoaJParaAlterar != null) {
 
@@ -168,14 +167,11 @@ public class CadastroBD {
                             } else {
                                 System.out.println("Pessoa não encontrada.");
                             }
-                            break;
-                        default:
-                            System.out.println("Opção inválida.");
-                            break;
                     }
-                    break;
+                        default -> System.out.println("Opção inválida.");
+                    }
                 }
-                case 3: {
+                case 3 ->  {
                     System.out.println("Escolha o tipo (1 - Pessoa Física, 2 - Pessoa Jurídica):");
                     int tipo = scanner.nextInt();
                     scanner.nextLine();
@@ -190,9 +186,8 @@ public class CadastroBD {
                         default ->
                             System.out.println("Opção inválida.");
                     }
-                    break;
                 }
-                case 4:
+                case 4 -> {
                     System.out.println("Escolha o tipo (1 - Pessoa Física, 2 - Pessoa Jurídica):");
                     int tipo = scanner.nextInt();
                     scanner.nextLine();
@@ -235,9 +230,9 @@ public class CadastroBD {
                         default ->
                             System.out.println("Opção inválida.");
                     }
-                    break;
+                }
 
-                case 5: {
+                case 5 ->  {
                     System.out.println("Escolha o tipo (1 - Pessoa Física, 2 - Pessoa Jurídica):");
                     int tipo2 = scanner.nextInt();
                     scanner.nextLine();
@@ -272,12 +267,9 @@ public class CadastroBD {
                         default ->
                             System.out.println("Opção inválida.");
                     }
-                    break;
                 }
 
-                default:
-                    System.out.println("Opção inválida.");
-                    break;
+                default -> System.out.println("Opção inválida.");
             }
         }
 
