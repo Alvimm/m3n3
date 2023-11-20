@@ -98,8 +98,7 @@ public class PessoaFisicaDAO {
 
             try (ResultSet generatedKeys = preparedStatementPessoa.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    //int novoId = sequenceManager.getValue("pessoa_id_seq");
-                    int novoId = generatedKeys.getInt(1); // ALTERAR
+                    int novoId = generatedKeys.getInt(1);
                     preparedStatementPessoaFisica.setInt(1, novoId);
                     preparedStatementPessoaFisica.setString(2, pessoaFisica.getCpf());
                     preparedStatementPessoaFisica.execute();

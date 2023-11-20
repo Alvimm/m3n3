@@ -18,7 +18,6 @@ import java.util.Scanner;
  * @author Filipe
  */
 public class CadastroBD {
-
     public static void main(String[] args) {
         ConectorBD conectorBD = new ConectorBD();
         SequenceManager sequenceManager = new SequenceManager(conectorBD);
